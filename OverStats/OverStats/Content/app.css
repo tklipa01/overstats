@@ -54,6 +54,11 @@
     border: solid 5px white;
 }
 
+.hero-table > tbody > tr:hover, 
+.hero-table > tbody > tr:hover .percentage {
+    background-color: #e7e7e7;
+}
+
 .hero-table > tbody > tr > td {
     border-left: solid 2px white;
     border-right: solid 2px white;
@@ -66,6 +71,10 @@
     height: 40px;
     background-color: #f8f8f8;
 }
+
+/*.percentage:hover {
+    background-color: #e7e7e7;
+}*/
 
 .percentage-bar {
     position: absolute;

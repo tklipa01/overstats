@@ -1,14 +1,16 @@
 ﻿<div class="container">
+    <!-- profile info -->
     <div class="row">
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="col-md-4 col-sm-6 col-xs-3">
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-3">
                 <div>
                     <img class="avatar" ng-src="{{vm.profile.avatar}}" />
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-9">
-                <h1><b>{{vm.profile.username}}</b>&nbsp;</h1>
-                <h4><span class="label label-info label-primary"><b>{{vm.profile.level}}</b></span></h4>
+            <div class="col-lg-9 col-md-8 col-sm-7 col-xs-9">
+                <h1 ng-if="!vm.profile.username">-</h1>
+                <h1 ng-if="vm.profile.username"><b>{{vm.profile.username}}</b>&nbsp;</h1>
+                <h4 ng-if="vm.profile.level"><span class="label label-info label-primary"><b>{{vm.profile.level}}</b></span></h4>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -35,56 +37,209 @@
 
     <br />
     <ul class="nav nav-pills">
-        <li role="presentation" class="clickable active"><a>Overview</a></li>
-        <li role="presentation" class="clickable"><a>Heroes</a></li>
+        <li role="presentation" class="clickable " ng-class="{'active' : vm.nav.overview}" ng-click="vm.nav.overview = true; vm.nav.heroes = false"><a>Overview</a></li>
+        <li role="presentation" class="clickable" ng-class="{'active' : vm.nav.heroes}" ng-click="vm.nav.overview = false; vm.nav.heroes = true"><a>Heroes</a></li>
     </ul>
 
-    <div class="col-md-6">
-        <div class="page-header">
-            <div class="pull-right">
-                <select class="form-control input-sm">
-                    <option>Quick Play</option>
-                    <option>Competitive</option>
-                </select>
+    <div ng-if="vm.nav.overview">
+        <div class="col-md-6">
+            <div class="page-header">
+                <div class="pull-right">
+                    <select class="form-control input-sm">
+                        <option>Quick Play</option>
+                        <option>Competitive</option>
+                    </select>
+                </div>
+                <h4>Career Stats</h4>
             </div>
-            <h4>Career Stats</h4>
-        </div>
 
-        <div class="text-center">
-            Coming as soon as api.lootbox.eu enables CORS for this request :)
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="text-center">
+                        <div>
+                            <h3 ng-if="!vm.careerStats['Eliminations-MostinGame']"><b>-</b></h3>
+                            <h3 ng-if="vm.careerStats['Eliminations-MostinGame']"><b>{{vm.careerStats['Eliminations-MostinGame']}}</b></h3>
+                        </div>
+                        <div>
+                            <h4>Eliminations</h4>
+                        </div>
+                        <hr />
+                        <div>
+                            Average: {{vm.careerStats['Eliminations-Average']}}
+                        </div>
+                        <div>
+                            Total: {{vm.careerStats.Eliminations}}
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-center">
+                        <div>
+                            <h3 ng-if="!vm.careerStats['DamageDone-MostinGame']"><b>-</b></h3>
+                            <h3 ng-if="vm.careerStats['DamageDone-MostinGame']"><b>{{vm.careerStats['DamageDone-MostinGame']}}</b></h3>
+                        </div>
+                        <div>
+                            <h4>Damage Done</h4>
+                        </div>
+                        <hr />
+                        <div>
+                            Average: {{vm.careerStats['DamageDone-Average']}}
+                        </div>
+                        <div>
+                            Total: {{vm.careerStats.DamageDone}}
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-center">
+                        <div>
+                            <h3 ng-if="!vm.careerStats['FinalBlows-MostinGame']"><b>-</b></h3>
+                            <h3 ng-if="vm.careerStats['FinalBlows-MostinGame']"><b>{{vm.careerStats['FinalBlows-MostinGame']}}</b></h3>
+                        </div>
+                        <div>
+                            <h4>Final Blows</h4>
+                        </div>
+                        <hr />
+                        <div>
+                            Average: {{vm.careerStats['FinalBlows-Average']}}
+                        </div>
+                        <div>
+                            Total: {{vm.careerStats.FinalBlows}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="text-center">
+                        <div>
+                            <h3 ng-if="!vm.careerStats['ObjectiveKills-MostinGame']"><b>-</b></h3>
+                            <h3 ng-if="vm.careerStats['ObjectiveKills-MostinGame']"><b>{{vm.careerStats['ObjectiveKills-MostinGame']}}</b></h3>
+                        </div>
+                        <div>
+                            <h4>Objective Kills</h4>
+                        </div>
+                        <hr />
+                        <div>
+                            Average: {{vm.careerStats['ObjectiveKills-Average']}}
+                        </div>
+                        <div>
+                            Total: {{vm.careerStats.ObjectiveKills}}
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-center">
+                        <div>
+                            <h3 ng-if="!vm.careerStats['ObjectiveTime-MostinGame']"><b>-</b></h3>
+                            <h3 ng-if="vm.careerStats['ObjectiveTime-MostinGame']"><b>{{vm.careerStats['ObjectiveTime-MostinGame']}}</b></h3>
+                        </div>
+                        <div>
+                            <h4>Objective Time</h4>
+                        </div>
+                        <hr />
+                        <div>
+                            Average: {{vm.careerStats['ObjectiveTime-Average']}}
+                        </div>
+                        <div>
+                            Total: {{vm.careerStats.ObjectiveTime}}
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-center">
+                        <div>
+                            <h3 ng-if="!vm.careerStats['HealingDone-MostinGame']"><b>-</b></h3>
+                            <h3 ng-if="vm.careerStats['HealingDone-MostinGame']"><b>{{vm.careerStats['HealingDone-MostinGame']}}</b></h3>
+                        </div>
+                        <div>
+                            <h4>Healing Done</h4>
+                        </div>
+                        <hr />
+                        <div>
+                            Average: {{vm.careerStats['HealingDone-Average']}}
+                        </div>
+                        <div>
+                            Total: {{vm.careerStats.HealingDone}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="text-center">
+                        <div>
+                            <h3 ng-if="!vm.careerStats['SoloKills-MostinGame']"><b>-</b></h3>
+                            <h3 ng-if="vm.careerStats['SoloKills-MostinGame']"><b>{{vm.careerStats['SoloKills-MostinGame']}}</b></h3>
+                        </div>
+                        <div>
+                            <h4>Solo Kills</h4>
+                        </div>
+                        <hr />
+                        <div>
+                            Average: {{vm.careerStats['SoloKills-Average']}}
+                        </div>
+                        <div>
+                            Total: {{vm.careerStats.SoloKills}}
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-center">
+                        <div>
+                            <h3 ng-if="!vm.careerStats['TimeSpentonFire-MostinGame']"><b>-</b></h3>
+                            <h3 ng-if="vm.careerStats['TimeSpentonFire-MostinGame']"><b>{{vm.careerStats['TimeSpentonFire-MostinGame']}}</b></h3>
+                        </div>
+                        <div>
+                            <h4>Time on Fire</h4>
+                        </div>
+                        <hr />
+                        <div>
+                            Average: {{vm.careerStats['TimeSpentonFire-Average']}}
+                        </div>
+                        <div>
+                            Total: {{vm.careerStats.TimeSpentonFire}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="page-header">
+                <div class="pull-right">
+                    <select class="form-control input-sm">
+                        <option>Time Played</option>
+                    </select>
+                </div>
+                <h4>Hero Comparison</h4>
+            </div>
+
+            <div>
+                <table class="hero-table">
+                    <tbody>
+                        <tr ng-repeat="hero in vm.heroes" style="width: 100%; height: 10px" class="clickable" ng-click="vm.openHero(hero.name)">
+                            <td style="width:110px" class="text-center">
+                                <h4>{{hero.name}}</h4>
+                            </td>
+                            <td style="overflow:hidden">
+                                <img ng-src="{{hero.image}}" style="margin: -100px 0 -100px 0;" />
+                            </td>
+                            <td class="percentage">
+                                <div style="position: absolute; z-index: 3; top: -1px; right: 5px;">
+                                    <h4>{{hero.playtime}}</h4>
+                                </div>
+                                <div class="percentage-bar" ng-style="{'width' : (hero.percentage * 100) + '%', 'background-color' : hero.color}">
+
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="page-header">
-            <div class="pull-right">
-                <select class="form-control input-sm">
-                    <option>Time Played</option>
-                </select>
-            </div>
-            <h4>Hero Comparison</h4>
-        </div>
 
-        <div>
-            <table class="hero-table">
-                <tbody>
-                    <tr ng-repeat="hero in vm.heroes" style="width: 100%; height: 10px">
-                        <td style="width:110px" class="text-center">
-                            <h4>{{hero.name}}</h4>
-                        </td>
-                        <td style="overflow:hidden">
-                            <img ng-src="{{hero.image}}" style="margin: -100px 0 -100px 0;" />
-                        </td>
-                        <td class="percentage">
-                            <div style="position: absolute; z-index: 3; top: -1px; right: 5px;">
-                                <h4>{{hero.playtime}}</h4>
-                            </div>
-                            <div class="percentage-bar" ng-style="{'width' : (hero.percentage * 100) + '%', 'background-color' : hero.color}">
-
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    <div ng-if="vm.nav.heroes">
+        <div class="page-header form-inline">
+            <select class="form-control input-sm" style="width:200px">
+                <option>Quick Play</option>
+                <option>Competitive</option>
+            </select>
+            <select class="form-control input-sm" style="width:200px">
+                <option ng-repeat="hero in vm.heroesSelectList" ng-model="selected" value="{{hero}}">{{hero}}</option>
+            </select>
         </div>
     </div>
 </div>

@@ -6,12 +6,18 @@ var Overstats;
             this.$location = $location;
             this.playerService = playerService;
             this.$routeParams = $routeParams;
+            this.nav = {
+                overview: false,
+                heroes: true
+            };
+            this.heroesSelectList = new Array();
             this.playerService.getProfile(this.$routeParams.id).then(function (data) {
                 _this.profile = data.data.data;
             });
-            //this.getAllHeroes(this.$routeParams.id, 'quickplay');
+            this.getAllHeroes(this.$routeParams.id, 'quickplay');
             this.getHeroes(this.$routeParams.id, 'quickplay');
         }
+        //api call doesnt allow CORS :(
         StatsController.prototype.getAllHeroes = function (btag, mode) {
             var _this = this;
             this.playerService.getAllHeroes(btag, mode).then(function (data) {
@@ -22,9 +28,34 @@ var Overstats;
             var _this = this;
             this.playerService.getHeroes(btag, mode).then(function (data) {
                 _this.heroes = data.data;
+                for (var i = 0; i < _this.heroes.length; i++) {
+                    if (_this.heroes[i].name == 'L&#xFA;cio') {
+                        _this.heroes[i].name = 'Lucio';
+                    }
+                    else if (_this.heroes[i].name == 'Torbj&#xF6;rn') {
+                        _this.heroes[i].name = 'Torbjorn';
+                    }
+                }
                 _this.setHeroColor(_this.heroes);
+                _this.getHeroesSelectList(_this.heroes);
                 console.log(_this.heroes);
             });
+        };
+        StatsController.prototype.getHeroesSelectList = function (heros) {
+            for (var i = 0; i < heros.length; i++) {
+                this.heroesSelectList.push(heros[i].name);
+            }
+        };
+        StatsController.prototype.getHero = function (mode, hero) {
+            var _this = this;
+            this.playerService.getHero(this.$routeParams.id, mode, hero).then(function (data) {
+                _this.hero = data.data;
+            });
+        };
+        StatsController.prototype.openHero = function (hero) {
+            this.nav.overview = false;
+            this.nav.heroes = true;
+            this.getHero('quickplay', hero);
         };
         StatsController.prototype.setHeroColor = function (heros) {
             for (var i = 0; i < heros.length; i++) {
@@ -67,7 +98,7 @@ var Overstats;
                 else if (heros[i].name == 'Zarya') {
                     heros[i].color = '#F571A8';
                 }
-                else if (heros[i].name == 'L&#xFA;cio') {
+                else if (heros[i].name == 'Lucio') {
                     heros[i].color = '#61A718';
                 }
                 else if (heros[i].name == 'Bastion') {
@@ -79,7 +110,7 @@ var Overstats;
                 else if (heros[i].name == 'Genji') {
                     heros[i].color = '#5E8C2B';
                 }
-                else if (heros[i].name == 'Torbj&#xF6;rn') {
+                else if (heros[i].name == 'Torbjorn') {
                     heros[i].color = '#FF6200';
                 }
                 else if (heros[i].name == 'Zenyatta') {

@@ -8,16 +8,24 @@
 
         }
 
+        getPatchNotes(): ng.IPromise<any> {
+            return this.$http.get('https://api.lootbox.eu/patch_notes')
+        }
+
         getProfile(battleTag: string): ng.IPromise<any> {
             return this.$http.get(this.api + battleTag + '/profile');
         }
 
         getAllHeroes(battleTag, mode): ng.IPromise<any> {
-            return this.$http.get(this.api + battleTag + '/' + mode + '/allHeroes');
+            return this.$http.get(this.api + battleTag + '/' + mode + '/allHeroes/');
         }
 
         getHeroes(battleTag, mode): ng.IPromise<any> {
             return this.$http.get(this.api + battleTag + '/' + mode + '/heroes');
+        }
+
+        getHero(battleTag, mode, hero): ng.IPromise<any> {
+            return this.$http.get(this.api + battleTag + '/' + mode + '/hero/' + hero + '/');
         }
     }
 
