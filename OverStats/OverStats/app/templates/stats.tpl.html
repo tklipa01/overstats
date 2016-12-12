@@ -1,0 +1,90 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="col-md-4 col-sm-6 col-xs-3">
+                <div>
+                    <img class="avatar" ng-src="{{vm.profile.avatar}}" />
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-9">
+                <h1><b>{{vm.profile.username}}</b>&nbsp;</h1>
+                <h4><span class="label label-info label-primary"><b>{{vm.profile.level}}</b></span></h4>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="col-md-6 col-sm-6 col-xs-6 text-center" >
+                <div>
+                    <h3 ng-if="!vm.profile.games.quick.wins">-</h3>
+                    <h3 ng-if="vm.profile.games.quick.wins"><i><b>{{vm.profile.games.quick.wins}}</b></i></h3>
+                </div>
+                <div>
+                    <h3><span class="fa fa-trophy"></span> Wins</h3>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6 text-center">
+                <div>
+                    <h3 ng-if="!vm.profile.playtime.quick">-</h3>
+                    <h3 ng-if="vm.profile.playtime.quick"><i><b>{{vm.profile.playtime.quick}}</b></i></h3>
+                </div>
+                <div>
+                    <h3><span class="fa fa-clock-o"></span> Time Played</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <ul class="nav nav-pills">
+        <li role="presentation" class="clickable active"><a>Overview</a></li>
+        <li role="presentation" class="clickable"><a>Heroes</a></li>
+    </ul>
+
+    <div class="col-md-6">
+        <div class="page-header">
+            <div class="pull-right">
+                <select class="form-control input-sm">
+                    <option>Quick Play</option>
+                    <option>Competitive</option>
+                </select>
+            </div>
+            <h4>Career Stats</h4>
+        </div>
+
+        <div class="text-center">
+            Coming as soon as api.lootbox.eu enables CORS for this request :)
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="page-header">
+            <div class="pull-right">
+                <select class="form-control input-sm">
+                    <option>Time Played</option>
+                </select>
+            </div>
+            <h4>Hero Comparison</h4>
+        </div>
+
+        <div>
+            <table class="hero-table">
+                <tbody>
+                    <tr ng-repeat="hero in vm.heroes" style="width: 100%; height: 10px">
+                        <td style="width:110px" class="text-center">
+                            <h4>{{hero.name}}</h4>
+                        </td>
+                        <td style="overflow:hidden">
+                            <img ng-src="{{hero.image}}" style="margin: -100px 0 -100px 0;" />
+                        </td>
+                        <td class="percentage">
+                            <div style="position: absolute; z-index: 3; top: -1px; right: 5px;">
+                                <h4>{{hero.playtime}}</h4>
+                            </div>
+                            <div class="percentage-bar" ng-style="{'width' : (hero.percentage * 100) + '%', 'background-color' : hero.color}">
+
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

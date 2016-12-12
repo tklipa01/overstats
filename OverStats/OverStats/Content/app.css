@@ -1,0 +1,77 @@
+﻿.jumbo-image {
+    margin-top: -75px;
+    /*background-image: url('overwatch-all-heroes-wallpaper-hd.jpg');*/
+    background-image: url('overwatch-all-heroes-wallpaper-hd-edit.jpg');
+    background-repeat: no-repeat;
+    /*background-attachment: fixed;*/
+    background-position-x: center;
+    background-position-y: 50px;
+    height: 539px;
+}
+
+.navbar {
+    border-radius: 0 !important;
+}
+
+.avatar {
+    height: 120px;
+    width: 120px;
+    border: solid 4px #E7E7E7;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.nav.nav-pills {
+    background-color: #F8F8F8;
+    border-bottom: solid 3px #E7E7E7;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+    color: #555555;
+    background-color: #E7E7E7;
+    border-radius: 0;
+}
+
+
+.nav > li > a {
+    color: #555;
+}
+.nav > li > a:hover {
+    background-color: #e7e7e7;
+    border-radius: 0;
+}
+
+.hero-table {
+    border: solid 2px white;
+}
+
+.hero-table > tbody > tr {
+    background-color: #f8f8f8;
+    border: solid 5px white;
+}
+
+.hero-table > tbody > tr > td {
+    border-left: solid 2px white;
+    border-right: solid 2px white;
+}
+
+
+.percentage{
+    position:relative;
+    width: 100%;
+    height: 40px;
+    background-color: #f8f8f8;
+}
+
+.percentage-bar {
+    position: absolute;
+    width: 10%;
+    height: 100%;
+    margin-top: -19px;
+    background-color: red;
+}
+
