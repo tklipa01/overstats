@@ -50,7 +50,7 @@
                         <option>Competitive</option>
                     </select>
                 </div>
-                <h4>Career Stats</h4>
+                <h4>Career Stats <span ng-if="!vm.careerStats" class="fa fa-spinner fa-spin"></span></h4>
             </div>
 
             <div class="row">
@@ -203,7 +203,7 @@
                         <option>Time Played</option>
                     </select>
                 </div>
-                <h4>Hero Comparison</h4>
+                <h4>Hero Comparison <span ng-if="!vm.heroes" class="fa fa-spinner fa-spin"></span></h4>
             </div>
 
             <div>

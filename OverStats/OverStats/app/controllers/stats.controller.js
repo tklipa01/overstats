@@ -7,8 +7,8 @@ var Overstats;
             this.playerService = playerService;
             this.$routeParams = $routeParams;
             this.nav = {
-                overview: false,
-                heroes: true
+                overview: true,
+                heroes: false
             };
             this.heroesSelectList = new Array();
             this.playerService.getProfile(this.$routeParams.id).then(function (data) {

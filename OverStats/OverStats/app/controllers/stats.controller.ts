@@ -7,8 +7,8 @@
         private hero;
 
         private nav = {
-            overview: false,
-            heroes: true
+            overview: true,
+            heroes: false
         };
 
         private heroesSelectList = new Array();
