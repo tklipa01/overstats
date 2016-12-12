@@ -2,6 +2,7 @@ var Overstats;
 (function (Overstats) {
     Overstats.app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
             $locationProvider.hashPrefix();
+            //$locationProvider.html5Mode(true);
             $routeProvider
                 .when('/', {
                 templateUrl: 'templates/home.tpl.html',

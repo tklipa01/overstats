@@ -6,10 +6,16 @@
         private heroes;
         private hero;
 
+        private currentHero;
+
         private nav = {
-            overview: true,
-            heroes: false
+            overview: false,
+            heroes: true
         };
+
+        private heroArray = [];
+
+        private gettingHero: boolean = false;
 
         private heroesSelectList = new Array();
 
@@ -50,19 +56,58 @@
 
         getHeroesSelectList(heros): void {
             for (var i = 0; i < heros.length; i++) {
-                this.heroesSelectList.push(heros[i].name);
+                if (heros[i].name == 'Solider: 76') {
+                    this.heroesSelectList.push({ name: heros[i].name, id: 'Solider76' });
+                }
+                else if (heros[i].name == 'McCree') {
+                    this.heroesSelectList.push({ name: heros[i].name, id: 'Mccree' });
+                }
+                else if (heros[i].name == 'D.Va') {
+                    this.heroesSelectList.push({ name: heros[i].name, id: 'DVa' });
+                }
+                else {
+                    this.heroesSelectList.push({ name: heros[i].name, id: heros[i].name});
+                }
             }
         }
 
+        unCamelCase(str): string {
+            return str
+                // insert a space between lower & upper
+                .replace(/([a-z])([A-Z])/g, '$1 $2')
+                // space before last upper in a sequence followed by lower
+                .replace(/\b([A-Z]+)([A-Z])([a-z])/, '$1 $2$3')
+                // uppercase the first character
+                .replace(/^./, function (str) { return str.toUpperCase(); })
+        }
+
         getHero(mode, hero): void {
+            this.gettingHero = true;
+
+            this.currentHero = hero;
+
             this.playerService.getHero(this.$routeParams.id, mode, hero).then((data): any => {
                 this.hero = data.data;
+                this.gettingHero = false;
+
+                var s = this.hero[this.currentHero];
+
+                //map to array
+                this.heroArray = Object.keys(s).map(function (data) {
+                    return [data, s[data]];
+                });
+
+                //split camel case of first value
+                for (var i = 0; i < this.heroArray.length; i++) {
+                    this.heroArray[i][0] = this.unCamelCase(this.heroArray[i][0]);
+                }
             });
         }
 
         openHero(hero): void {
             this.nav.overview = false;
             this.nav.heroes = true;
+
 
             this.getHero('quickplay', hero);
 

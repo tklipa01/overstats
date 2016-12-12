@@ -41,6 +41,7 @@
         <li role="presentation" class="clickable" ng-class="{'active' : vm.nav.heroes}" ng-click="vm.nav.overview = false; vm.nav.heroes = true"><a>Heroes</a></li>
     </ul>
 
+    <!-- Overview -->
     <div ng-if="vm.nav.overview">
         <div class="col-md-6">
             <div class="page-header">
@@ -231,15 +232,43 @@
         </div>
     </div>
 
+    <!-- Heroes -->
     <div ng-if="vm.nav.heroes">
-        <div class="page-header form-inline">
-            <select class="form-control input-sm" style="width:200px">
-                <option>Quick Play</option>
-                <option>Competitive</option>
-            </select>
-            <select class="form-control input-sm" style="width:200px">
-                <option ng-repeat="hero in vm.heroesSelectList" ng-model="selected" value="{{hero}}">{{hero}}</option>
-            </select>
+        <br /><br />
+        <div class="form-inline">
+                <select class="form-control" style="margin-bottom: 5px" ng-model="mode" ng-init="mode = 'quickplay'" ng-change="vm.getHero(mode, vm.currentHero)" ng-disabled="vm.heroesSelectList.length == 0">
+                    <option value="quickplay">Quick Play</option>
+                    <option value="competitive">Competitive</option>
+                </select>
+                <select class="form-control" style="margin-bottom: 5px" ng-change="vm.getHero(mode, vm.currentHero)" ng-model="vm.currentHero" ng-disabled="vm.heroesSelectList.length == 0">
+                    <option ng-repeat="hero in vm.heroesSelectList" value="{{hero.id}}">{{hero.name}}</option>
+                </select>
+                <input class="form-control pull-right" ng-model="search" placeholder="Search" style="margin-bottom: 5px" />       
+        </div>
+
+        <hr />
+        <br />
+
+        <div ng-if="vm.gettingHero">
+            <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+        </div>
+
+        <div ng-if="!vm.gettingHero" ng-repeat="item in vm.heroArray | filter:search" class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+            <div class="panel panel-body" style="height:126px">
+                <div>
+                    <h2 ng-if="!vm.hero[vm.currentHero]">-</h2>
+                    <h2 ng-if="vm.hero[vm.currentHero]"><i>{{item[1]}}</i></h2>
+                </div>
+                <div>
+                    <h4>{{item[0]}}</h4>
+                </div>
+            </div>
         </div>
     </div>
 </div>

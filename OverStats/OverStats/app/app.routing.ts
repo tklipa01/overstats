@@ -1,6 +1,7 @@
 ﻿module Overstats {
     app.config(['$routeProvider', '$locationProvider', function ($routeProvider: ng.route.IRouteProvider, $locationProvider) {
         $locationProvider.hashPrefix();
+        //$locationProvider.html5Mode(true);
 
         $routeProvider
             .when('/', {
