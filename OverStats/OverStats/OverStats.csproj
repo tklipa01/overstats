@@ -72,6 +72,7 @@
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="server.js" />
+    <None Include="Procfile" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
